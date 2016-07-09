@@ -1,3 +1,14 @@
+/**
+ * Copyright 2016-present, Baifendian, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule Form.js
+ */
+
 import React, { Component, PropTypes } from 'react'
 import { Text, View, TextInput, AlertIOS } from 'react-native'
 import format from 'dateformat'
@@ -112,7 +123,7 @@ class Form extends Component {
         value: data[name],
         ...item.passProps
       }, () => {
-        this.handleChange(name, this.pushedComponent.state.value)
+        this.handleChange(name, +new Date(this.pushedComponent.state.value))
       })
     }
   }

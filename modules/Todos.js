@@ -1,7 +1,17 @@
+/**
+ * Copyright 2016-present, Baifendian, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule Todos.js
+ */
+
 import React, { Component, PropTypes } from 'react'
 import { Text, View } from 'react-native'
 import format from 'dateformat'
-import qs from 'qs'
 import List from './List'
 
 const style = {
@@ -64,16 +74,17 @@ class Todos extends Component {
   render() {
     return (
       <List 
-        url={'queryTodolist.do?' + qs.stringify(this.props.query)}
-        render={this.renderItem}
+        render={this.renderItem.bind(this)}
         searchCol="title"
+        {...this.props}
       />
     )
   }
 }
 
 Todos.propTypes = {
-  query: PropTypes.object  
+  url: PropTypes.string,
+  data: PropTypes.array
 }
 
 export default Todos

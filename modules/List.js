@@ -1,5 +1,16 @@
+/**
+ * Copyright 2016-present, Baifendian, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule List.js
+ */
+
 import React, { Component, PropTypes } from 'react'
-import { Text, View, TouchableHighlight } from 'react-native'
+import { Text, View, TouchableHighlight, ScrollView } from 'react-native'
 import SearchBar from 'react-native-search-bar'
 import Fetch from './Fetch'
 
@@ -44,6 +55,10 @@ class List extends Component {
     this.setState({ list })
   }
 
+  handleScroll(rest) {
+    console.log(rest)
+  }
+
   render() {
     const { url, onItemPress, render } = this.props
     const list = this.state.list
@@ -54,19 +69,21 @@ class List extends Component {
           url={url} 
           onLoad={this.handleLoad.bind(this)} 
         >
-          {list && list.length ? list.map((item, i) => {
-            const view = render(item)
-            return onItemPress ?
-              <TouchableHighlight 
-                style={style.item}
-                key={i}
-                underlayColor="#ececec"
-                onPress={onItemPress.bind(this, item)}
-              >
-                {view}
-              </TouchableHighlight> :
-              <View key={i} style={style.item}>{view}</View>
-          }) : <Text style={style.empty}>暂无数据</Text>}
+          <ScrollView style={{height: 500}}>
+            {list && list.length ? list.map((item, i) => {
+              const view = render(item)
+              return onItemPress ?
+                <TouchableHighlight 
+                  style={style.item}
+                  key={i}
+                  underlayColor="#ececec"
+                  onPress={onItemPress.bind(this, item)}
+                >
+                  {view}
+                </TouchableHighlight> :
+                <View key={i} style={style.item}>{view}</View>
+            }) : <Text style={style.empty}>暂无数据</Text>}
+          </ScrollView>
         </Fetch>
       </View>
     )

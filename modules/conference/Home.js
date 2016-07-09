@@ -1,9 +1,22 @@
+/**
+ * Copyright 2016-present, Baifendian, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule conference/Home.js
+ */
+
 import React, { Component } from 'react'
-import { Text, View, CameraRoll } from 'react-native'
+import { Text, View, AlertIOS } from 'react-native'
 import format from 'dateformat'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import List from '../List'
+import Select from '../Select'
 import Detail from './Detail'
+import UserView from '../contacts/UserView'
 import style from './style/home'
 
 class Home extends Component {
@@ -17,7 +30,6 @@ class Home extends Component {
     }
     this.state = {
       url: 'queryMeetingList.do?uid=' + global.user.uid
-      // url: 'test'
     }
   }
 
@@ -31,9 +43,38 @@ class Home extends Component {
         },
         ...item
       },
+      rightButtonTitle: '分享',
+      onRightButtonPress: this.handleShare.bind(this, item)
+    })
+  }
+
+  handleShare(item) {
+    this.props.navigator.push({
+      title: '选择分享对象',
+      component: Select,
+      passProps: {
+        ref: component => {
+          this.pushedComponent = component
+        },
+        url: 'user/getAllUser',
+        uniqueCol: 'name',
+        searchCol: 'email',
+        multiple: true,
+        render: item => <UserView {...item} />
+      },
+      rightButtonTitle: '确定',
       onRightButtonPress: () => {
-        navigator.pop()
-        this.setState({date: this.pushedComponent.state.date })
+        xhr({
+          url: 'share.do',
+          type: 'POST',
+          data: {
+            meeting: item,
+            shareList: this.pushedComponent.state.value
+          },
+          success() {
+            AlertIOS.alert('分享成功')
+          }
+        })
       }
     })
   }

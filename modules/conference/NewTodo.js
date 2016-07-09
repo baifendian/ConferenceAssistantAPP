@@ -1,5 +1,17 @@
+/**
+ * Copyright 2016-present, Baifendian, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule conference/NewTodo.js
+ */
+
 import React, { Component } from 'react'
 import Form from '../Form'
+import UserView from '../contacts/UserView'
 
 class NewTodo extends Component {
 
@@ -15,7 +27,7 @@ class NewTodo extends Component {
       type: 'select',
       labelCol: 'name',
       passProps: {
-        url: 'getAllUser.do',
+        url: 'user/getAllUser',
         uniqueCol: 'name',
         searchCol: 'email',
         render: item => <UserView {...item} />
@@ -39,7 +51,7 @@ class NewTodo extends Component {
     const form = this.refs.form
     form.save(callback, {
       todolist: {
-        mid: this.porps.mid,
+        mid: this.props.mid,
         ...form.state.data
       }
     })
@@ -49,7 +61,7 @@ class NewTodo extends Component {
     return (
       <Form 
         ref="form"
-        url={'createTodolist.do'}
+        url="createTodolist.do"
         navigator={this.props.navigator} 
         items={this.items} 
         rules={this.rules}

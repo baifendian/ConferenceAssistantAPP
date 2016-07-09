@@ -6,10 +6,5 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @providesModule todos/Home.js
+ * @providesModule {module}
  */
-
-import React, { Component } from 'react'
-import Todos from '../Todos'
-
-export default Todos

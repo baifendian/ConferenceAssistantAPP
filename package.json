@@ -3,9 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "banner": "node bin/banner.js"
   },
   "dependencies": {
+    "rd": "0.0.2",
     "react": "15.2.1",
     "react-addons-update": "^15.2.1",
     "react-native": "0.29.0",
@@ -13,6 +15,7 @@
     "react-native-gifted-messenger": "^0.1.4",
     "react-native-search-bar": "^2.11.0",
     "react-native-spinkit": "^0.1.2",
+    "react-native-uploader": "0.0.9",
     "react-native-vector-icons": "^2.0.3"
   }
 }

@@ -1,8 +1,19 @@
+/**
+ * Copyright 2016-present, Baifendian, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule conference/Chat.js
+ */
+
 import React, { Component } from 'react'
 import { Text, View, Dimensions } from 'react-native'
 import Message from 'react-native-gifted-messenger'
 
-class Home extends Component {
+class Chat extends Component {
 
   constructor(props) {
     super(props)
@@ -31,7 +42,6 @@ class Home extends Component {
     this.ws = new WebSocket('ws://10.11.6.170:8080/ca/socket')
     this.ws.onmessage = e => {
       const message = JSON.parse(e.data)
-      console.log(message)
       const messages = this.state.messages
       this.setState({messages: messages.concat(message)})
     }
@@ -55,4 +65,4 @@ class Home extends Component {
   }
 }
 
-export default Home
+export default Chat

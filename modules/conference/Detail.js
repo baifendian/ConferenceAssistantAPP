@@ -1,10 +1,24 @@
+/**
+ * Copyright 2016-present, Baifendian, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule conference/Detail.js
+ */
+
 import React, { Component } from 'react'
-import { Text, View, TextInput, TouchableHighlight, AlertIOS } from 'react-native'
+import { Text, View } from 'react-native'
 import format from 'dateformat'
 import Term from '../Term'
 import Todos from '../Todos'
 import NewTodo from './NewTodo'
 import Chat from './Chat'
+import Photo from './Photo'
+import TakePhoto from './TakePhoto'
+import xhr from '../xhr'
 import style from './style/detail'
 
 class Detail extends Component {
@@ -19,9 +33,7 @@ class Detail extends Component {
         ref: component => {
           this.todos = component
         },
-        query: {
-          mid: this.props.mid  
-        }
+        data: this.props.todoList
       }
     })
   }
@@ -31,13 +43,15 @@ class Detail extends Component {
       title: '创建待办',
       component: NewTodo,
       passProps: {
+        ref: component => {
+          this.pushedComponent = component
+        },
         mid: this.props.mid
       },
       rightButtonTitle: '确定',
       onRightButtonPress: () => {
         this.pushedComponent.save(() => {
-          this.todos.forceUpdate()
-          this.refs.nav.pop()
+          this.props.navigator.pop()
         })
       }
     })
@@ -50,6 +64,54 @@ class Detail extends Component {
       passProps: {
         mid: this.props.mid
       }
+    })
+  }
+
+  handleTakePhoto() {
+    this.props.navigator.push({
+      title: '相机',
+      component: TakePhoto,
+      rightButtonTitle: '确定',
+      onRightButtonPress: this.handlePhotoOk.bind(this),
+      passProps: {
+        ref: component => {
+          component && (this.camera = component.refs.camera)
+        }
+      }
+    })
+  }
+
+  handlePhotoOk() {
+    this.camera.capture()
+      .then((data) => {
+        this.uploadPhoto(data.path)
+      })
+  }
+
+  uploadPhoto(path) {
+    const formData = new FormData()
+    formData.append('file', {
+      uri: path,
+      name: 'test.jpg',
+      // type: 'image/jpeg'
+      type: 'application/octet-stream'
+    })
+    xhr({
+      url: 'upload1.do',
+      type: 'POST',
+      data: formData,
+      // beforeSend(request) {
+      //   request.setRequestHeader('Content-Type', 'multipart/form-data')
+      // }
+    })
+  }
+
+  handlePhotoPress() {
+    this.props.navigator.push({
+      title: '照片墙',
+      component: Photo,
+      rightButtonTitle: '拍照',
+      onRightButtonPress: this.handleTakePhoto.bind(this)
     })
   }
 
@@ -82,8 +144,11 @@ class Detail extends Component {
         <Term label="内容:">
           <Text>{props.content}</Text>
         </Term>
+        <Term label="照片墙" onPress={this.handlePhotoPress.bind(this)}>
+          <Text style={style.termContentRight}>打开</Text>
+        </Term>
         <Term label="待办事项" onPress={this.handleTodosPress.bind(this)}>
-          <Text style={style.termContentRight}>1条</Text>
+          <Text style={style.termContentRight}>{props.todoList ? props.todoList.length : 0}条</Text>
         </Term>
         <Term label="群聊" onPress={this.handleChatPress.bind(this)}>
           <Text style={style.termContentRight}>打开</Text>
