@@ -1,0 +1,13 @@
+[{
+  "title": "技术方案评审会议",
+  "type": "0",
+  "position": "MongoDB会议室",
+  "conventioners": ["Max", "das", "dsad"],
+  "desc": "方案详见附件，请查收！本次会议我们会得出一个初步意见，后续进行完善。另外提醒大家务必准时参会，谢谢。"
+}, {
+  "title": "研发Leader碰头会",
+  "type": "1",
+  "position": "Scala会议室",
+  "conventioners": ["Terry", "das", "dsad", "fdsf", "ds"],
+  "desc": "方案详见附件，请查收！本次会议我们会得出一个初步意见，后续进行完善。另外提醒大家务必准时参会，谢谢。"
+}]
