@@ -69,7 +69,7 @@ class Fetch extends Component {
       <View style={style.fetchMask}>
         {(() => {
           switch(this.state.xhr) {
-            case 'loading': return <Spinner type="FadingCircleAlt" color="#cccccc" />
+            case 'loading': return <Spinner type="Wave" color="#cccccc" />
             case 'error': return <Text>{this.state.msg}</Text>
           }
         })()}
