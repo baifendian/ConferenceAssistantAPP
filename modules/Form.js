@@ -11,10 +11,10 @@ const style = {
     padding: 10
   },
   formItem: {
-    backgroundColor: '#fff',
-    borderWidth: 1, 
+    // backgroundColor: '#fff',
+    borderBottomWidth: 1, 
     borderColor: '#ccc', 
-    borderRadius: 4, 
+    // borderRadius: 4, 
     padding: 10,
     marginBottom: 10
   },

@@ -8,12 +8,12 @@ import Mine from './modules/mine'
 import Login from './modules/Login'
 import xhr from './modules/xhr'
 
-global.user = {
-  name: '李金ds伟',
-  uid: 'jinwei',
-  email: 'jinwei.li@baifendian.com',
-  token: 'tmd'
-}
+// global.user = {
+//   name: '李金ds伟',
+//   uid: 'jinwei',
+//   email: 'jinwei.li@baifendian.com',
+//   token: 'tmd'
+// }
 
 class App extends Component {
 
@@ -27,7 +27,10 @@ class App extends Component {
   componentWillMount() {
     global.now = new Date()
 
-    // const userString = async AsyncStorage.wgetItem('user')
+    const userString = AsyncStorage.getItem('user', (err, result) => {
+      debugger
+    })
+
     // global.user = userString ? JSON.parse(userString) : null
 
     xhr.baseUrl = 'http://10.11.6.170:8080/ca/'

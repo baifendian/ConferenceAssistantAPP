@@ -4,22 +4,24 @@ import Form from './Form'
 
 const style = {
   container: {
+    flex: 1,
+    padding: 10,
     paddingTop: 150,
-    backgroundColor: '#fafafa'
+    backgroundColor: '#f1f1f1'
   },
   header: {
     marginBottom: 30,
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'center'
   },
   title: {
     textAlign: 'right',
+    color: '#999',
     fontSize: 30
   },
   subTitle: {
     textAlign: 'right',
-    color: '#999',
+    color: '#aaa',
     fontSize: 12,
     marginTop: 5
   },
@@ -32,6 +34,13 @@ const style = {
   submitText: {
     color: '#fff',
     textAlign: 'center'
+  },
+  copyright: {
+    color: '#aaa',
+    fontSize: 12,
+    marginTop: 10,
+    textAlign: 'right',
+    marginRight: 10
   }
 }
 
@@ -40,7 +49,7 @@ class Login extends Component {
   constructor() {
     super()
     this.items = [{
-      name: 'username',
+      name: 'name',
       label: '用户',
       type: 'input'
     }, {
@@ -52,8 +61,8 @@ class Login extends Component {
       }
     }]
     this.rules = {
-      email(v) {
-        if (!v) return '请输入邮箱'
+      name(v) {
+        if (!v) return '请输入用户名'
       },
       password(v) {
         if (!v) return '请输入密码'
@@ -64,7 +73,7 @@ class Login extends Component {
 
   handleSubmit() {
     this.refs.form.save(data => {
-      this.props.onLogin()
+      this.props.onLogin(data)
     })
   }
 
@@ -79,7 +88,7 @@ class Login extends Component {
         </View>
         <Form 
           ref="form"
-          url={'createTodolist.do'}
+          url="user/login"
           items={this.items} 
           rules={this.rules}
           data={this.state} 
@@ -87,6 +96,7 @@ class Login extends Component {
         <TouchableHighlight underlayColor="#42a5f5" onPress={this.handleSubmit.bind(this)} style={style.submit}>
           <Text style={style.submitText}>登录</Text>
         </TouchableHighlight>
+        <Text style={style.copyright}>Copyright©2016 Baifendian Corporation</Text>
       </View>
     )
   }
