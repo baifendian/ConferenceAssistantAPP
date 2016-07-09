@@ -18,28 +18,19 @@ class Chat extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      messages: [
-        {
-          text: '轻举、金伟，今晚 dota 开黑啊?',
-          name: 'React-Bot',
-          image: {uri: 'https://facebook.github.io/react/img/logo_og.png'},
-          position: 'left',
-          date: new Date(2016, 3, 14, 13, 0),
-          uniqueId: Math.round(Math.random() * 10000), // simulating server-side unique id generation
-        },
-        {
-          text: "Yes, and I use Gifted Messenger!",
-          name: 'Awesome Developer',
-          position: 'right',
-          date: new Date(2016, 3, 14, 13, 1),
-          uniqueId: Math.round(Math.random() * 10000), // simulating server-side unique id generation
-        }
-      ]
+      messages: [{
+        text: '请问开始了吗?',
+        name: 'jinwei',
+        image: {uri: global.baseUrl + 'static/pic/4.png'},
+        position: 'left',
+        date: new Date(),
+        uniqueId: Math.random()
+      }]
     }
   }
 
   componentDidMount() {
-    this.ws = new WebSocket('ws://10.11.6.170:8080/ca/socket')
+    this.ws = new WebSocket(global.baseUrl.replace(/^http/, 'ws') + 'socket')
     this.ws.onmessage = e => {
       const message = JSON.parse(e.data)
       const messages = this.state.messages
@@ -49,6 +40,7 @@ class Chat extends Component {
 
   handleSend(message) {
     message.mid = this.props.mid
+    message.uid = global.user.uid
     message.uniqueId = Math.random()
     this.ws.send(JSON.stringify(message))
   }
@@ -58,6 +50,7 @@ class Chat extends Component {
       <Message 
         maxHeight={Dimensions.get('window').height - 120}
         senderName={global.user.name}
+        senderImage={{uri: global.baseUrl + 'static/pic/4.png'}}
         handleSend={this.handleSend.bind(this)}
         messages={this.state.messages}
       />

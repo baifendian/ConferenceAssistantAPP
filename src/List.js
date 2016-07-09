@@ -60,7 +60,7 @@ class List extends Component {
   }
 
   render() {
-    const { url, onItemPress, render } = this.props
+    const { url, onItemPress, render, emptyMessage } = this.props
     const list = this.state.list
     return (
       <View>
@@ -82,7 +82,7 @@ class List extends Component {
                   {view}
                 </TouchableHighlight> :
                 <View key={i} style={style.item}>{view}</View>
-            }) : <Text style={style.empty}>暂无数据</Text>}
+            }) : <Text style={style.empty}>{emptyMessage || '暂无数据'}</Text>}
           </ScrollView>
         </Fetch>
       </View>
@@ -92,6 +92,7 @@ class List extends Component {
 
 List.propTypes = {
   url: PropTypes.string, 
+  emptyMessage: PropTypes.string,
   data: PropTypes.array, 
   render: PropTypes.func, 
   onItemPress: PropTypes.func,

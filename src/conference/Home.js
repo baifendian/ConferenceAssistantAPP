@@ -17,6 +17,7 @@ import List from '../List'
 import Select from '../Select'
 import Detail from './Detail'
 import UserView from '../contacts/UserView'
+import xhr from '../xhr'
 import style from './style/home'
 
 class Home extends Component {
@@ -73,6 +74,7 @@ class Home extends Component {
           },
           success() {
             AlertIOS.alert('分享成功')
+            this.props.navigator.pop()
           }
         })
       }

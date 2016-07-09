@@ -99,10 +99,7 @@ class Detail extends Component {
     xhr({
       url: 'upload1.do',
       type: 'POST',
-      data: formData,
-      // beforeSend(request) {
-      //   request.setRequestHeader('Content-Type', 'multipart/form-data')
-      // }
+      data: formData
     })
   }
 

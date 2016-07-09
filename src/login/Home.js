@@ -6,18 +6,18 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @providesModule Login.js
+ * @providesModule login/Home.js
  */
 
 import React, { Component } from 'react'
 import { Text, View, TouchableHighlight } from 'react-native'
-import Form from './Form'
+import Form from '../Form'
 
 const style = {
   container: {
     flex: 1,
     padding: 10,
-    paddingTop: 150,
+    paddingTop: 100,
     backgroundColor: '#f1f1f1'
   },
   header: {

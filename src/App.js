@@ -11,6 +11,8 @@
 
 import React, { Component } from 'react'
 import { AsyncStorage, AlertIOS } from 'react-native'
+import Tabbar from './Tabbar'
+import Login from './login'
 import xhr from './xhr'
 
 class App extends Component {
@@ -18,9 +20,6 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.hasGotItem = false
-    this.state = {
-      selectedTab: 'conference'
-    }
   }
 
   componentWillMount() {
@@ -32,7 +31,7 @@ class App extends Component {
       result && this.updateUser(JSON.parse(result))
     })
 
-    xhr.baseUrl = 'http://10.11.6.170:8080/ca/'
+    xhr.baseUrl = global.baseUrl = 'http://10.11.6.170:8080/ca/'
     xhr.header = {}
     if (global.user) {
       xhr.header.token = global.user.token
@@ -68,9 +67,7 @@ class App extends Component {
     if (!global.user) {
       return <Login onLogin={this.handleLogin.bind(this)} />
     }
-    return (
-      
-    )
+    return <Tabbar />
   }
 }
 

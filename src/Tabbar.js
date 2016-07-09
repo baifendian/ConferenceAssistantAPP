@@ -19,6 +19,13 @@ import Mine from './mine'
 
 class Tabbar extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      selectedTab: 'conference'
+    }
+  }
+
   render() {
     return (
       <TabBarIOS

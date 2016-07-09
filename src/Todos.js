@@ -74,6 +74,7 @@ class Todos extends Component {
   render() {
     return (
       <List 
+        emptyMessage="暂无待办事项"
         render={this.renderItem.bind(this)}
         searchCol="title"
         {...this.props}
