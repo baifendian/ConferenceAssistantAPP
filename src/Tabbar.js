@@ -61,7 +61,6 @@ class Tabbar extends Component {
         </Icon.TabBarItemIOS>
         <Icon.TabBarItemIOS
           title="待办"
-          badge={2}
           iconName="history"
           iconSize={20}
           selected={this.state.selectedTab === 'todos'}

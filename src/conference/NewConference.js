@@ -86,8 +86,8 @@ class NewConference extends Component {
       }
     }
     this.state = {
-      st: new Date(),
-      et: new Date()
+      st: +global.now,
+      et: +global.now
     }
   }
 
@@ -105,7 +105,7 @@ class NewConference extends Component {
     return (
       <Form 
         ref="form"
-        url={'createMeeting.do'}
+        url="createMeeting.do"
         navigator={this.props.navigator} 
         items={this.items} 
         rules={this.rules}

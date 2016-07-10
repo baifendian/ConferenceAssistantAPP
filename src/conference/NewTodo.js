@@ -43,7 +43,7 @@ class NewTodo extends Component {
       }
     }
     this.state = {
-      deadline: new Date(),
+      et: +global.now,
     }
   }
 

@@ -71,12 +71,17 @@ class Todos extends Component {
     ) 
   }
 
+  update() {
+    this.refs.list.update()
+  }
+
   render() {
     return (
       <List 
+        ref="list"
         emptyMessage="暂无待办事项"
         render={this.renderItem.bind(this)}
-        searchCol="title"
+        searchCol="desc"
         {...this.props}
       />
     )
@@ -84,8 +89,7 @@ class Todos extends Component {
 }
 
 Todos.propTypes = {
-  url: PropTypes.string,
-  data: PropTypes.array
+  url: PropTypes.string
 }
 
 export default Todos

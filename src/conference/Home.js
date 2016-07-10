@@ -72,7 +72,7 @@ class Home extends Component {
             meeting: item,
             shareList: this.pushedComponent.state.value
           },
-          success() {
+          success: () => {
             AlertIOS.alert('分享成功')
             this.props.navigator.pop()
           }
@@ -148,13 +148,19 @@ class Home extends Component {
     ) 
   }
 
+  update() {
+    this.refs.list.update()
+  }
+
   render() {
     return (
       <List 
+        ref="list"
         url={this.state.url}
         onItemPress={this.handleItemPress.bind(this)}
         render={this.renderItem.bind(this)}
         searchCol="title"
+        emptyMessage="暂无会议"
       />
     )
   }

@@ -28,7 +28,7 @@ const style = {
   title: {
     textAlign: 'right',
     color: '#999',
-    fontSize: 30
+    fontSize: 26
   },
   subTitle: {
     textAlign: 'right',

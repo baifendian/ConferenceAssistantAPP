@@ -1,9 +1,9 @@
 package com.conferenceassistantapp;
 
 import com.facebook.react.ReactActivity;
-import com.lwansbrough.ReactCamera.ReactCamera;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
+import com.lwansbrough.RCTCamera.RCTCameraPackage;
 
 public class MainActivity extends ReactActivity {
 

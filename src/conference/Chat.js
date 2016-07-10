@@ -30,9 +30,14 @@ class Chat extends Component {
   }
 
   componentDidMount() {
-    this.ws = new WebSocket(global.baseUrl.replace(/^http/, 'ws') + 'socket')
+    const mid = this.props.mid
+    const uid = global.user.uid
+    this.ws = new WebSocket(global.baseUrl.replace(/^http/, 'ws') + 'socket?mid=' + mid + '&uid=' + uid)
     this.ws.onmessage = e => {
       const message = JSON.parse(e.data)
+      if (message.uid !== global.user.uid) {
+        message.position = 'left'
+      }
       const messages = this.state.messages
       this.setState({messages: messages.concat(message)})
     }

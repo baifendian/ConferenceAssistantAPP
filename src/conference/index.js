@@ -23,7 +23,7 @@ class Conference extends Component {
       rightButtonTitle: '确定',
       onRightButtonPress: () => {
         this.pushedComponent.save(() => {
-          this.home.forceUpdate()
+          this.home.update()
           this.refs.nav.pop()
         })
       },

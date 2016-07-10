@@ -10,7 +10,7 @@
  */
 
 import React, { Component } from 'react'
-import { Text, View, TouchableHighlight } from 'react-native'
+import { Text, View, TouchableHighlight, AsyncStorage } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Conference from '../conference/Home'
 import Todos from '../todos/Home'
@@ -54,6 +54,17 @@ const style = {
   recordCount: {
     color: '#2196f3',
     fontWeight: 'bold'
+  },
+  logout: {
+    margin: 10,
+    marginTop: 300,
+    padding: 10,
+    backgroundColor: '#FF1717',
+    borderRadius: 4
+  },
+  logoutText: {
+    color: '#fff',
+    textAlign: 'center'
   }
 }
 
@@ -73,6 +84,12 @@ class Home extends Component {
     this.props.navigator.push({
       title: '我的待办事项',
       component: Todos
+    })
+  }
+
+  handleLogout() {
+    AsyncStorage.removeItem('user', () => {
+      global.app.logout()
     })
   }
 
@@ -118,6 +135,9 @@ class Home extends Component {
             </View>
           </TouchableHighlight>
         </View>
+        <TouchableHighlight underlayColor="#D81414" onPress={this.handleLogout.bind(this)} style={style.logout}>
+          <Text style={style.logoutText}>退出</Text>
+        </TouchableHighlight>
       </View>
     )
   }

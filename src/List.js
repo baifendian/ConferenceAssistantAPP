@@ -55,8 +55,8 @@ class List extends Component {
     this.setState({ list })
   }
 
-  handleScroll(rest) {
-    console.log(rest)
+  update() {
+    this.refs.fetch.update()
   }
 
   render() {
@@ -66,6 +66,7 @@ class List extends Component {
       <View>
         <SearchBar placeholder="搜索" onChangeText={this.handleSearch.bind(this)} />
         <Fetch 
+          ref="fetch"
           url={url} 
           onLoad={this.handleLoad.bind(this)} 
         >

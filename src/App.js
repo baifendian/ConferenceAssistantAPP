@@ -23,12 +23,14 @@ class App extends Component {
   }
 
   componentWillMount() {
-    
+
+    global.app = this
+
     global.now = new Date()
 
     const userString = AsyncStorage.getItem('user', (err, result) => {
       this.hasGotItem = true
-      result && this.updateUser(JSON.parse(result))
+      result ? this.updateUser(JSON.parse(result)) : this.forceUpdate()
     })
 
     xhr.baseUrl = global.baseUrl = 'http://10.11.6.170:8080/ca/'
@@ -42,8 +44,7 @@ class App extends Component {
           option.success && option.success(res.data)
           break
         case 502:
-          global.user = null
-          this.forceUpdate()
+          this.logout()
           break
         default:
           AlertIOS.alert(res.message || 'unknown error')
@@ -54,6 +55,12 @@ class App extends Component {
   updateUser(data) {
     global.user = data
     xhr.header.token = global.user.token
+    this.forceUpdate()
+  }
+
+  logout() {
+    global.user = null
+    xhr.header.token = null
     this.forceUpdate()
   }
 

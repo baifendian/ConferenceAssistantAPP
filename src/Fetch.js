@@ -45,6 +45,10 @@ class Fetch extends Component {
     this.props.url && this.fetch()
   }
 
+  update() {
+    this.fetch()
+  }
+
   fetch() {
     this.lazyFetch()
     setTimeout(() => {

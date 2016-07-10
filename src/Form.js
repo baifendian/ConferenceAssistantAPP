@@ -22,11 +22,10 @@ const style = {
     padding: 10
   },
   formItem: {
-    // backgroundColor: '#fff',
     borderBottomWidth: 1, 
-    borderColor: '#ccc', 
-    // borderRadius: 4, 
-    padding: 10,
+    borderColor: '#ccc',
+    alignItems: 'center',
+    minHeight: 34,
     marginBottom: 10
   },
   input: {
@@ -111,10 +110,10 @@ class Form extends Component {
     date: (data, item) => {
       const { name, label } = item 
       this.location(label, Datepicker, {
-        date: data[name],
+        date: new Date(data[name]),
         ...item.passProps
       }, () => {
-        this.handleChange(name, this.pushedComponent.state.date)
+        this.handleChange(name, +new Date(this.pushedComponent.state.date))
       })
     },
     select: (data, item) => {
@@ -123,7 +122,7 @@ class Form extends Component {
         value: data[name],
         ...item.passProps
       }, () => {
-        this.handleChange(name, +new Date(this.pushedComponent.state.value))
+        this.handleChange(name, this.pushedComponent.state.value)
       })
     }
   }

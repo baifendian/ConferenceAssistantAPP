@@ -33,7 +33,7 @@ class Detail extends Component {
         ref: component => {
           this.todos = component
         },
-        data: this.props.todoList
+        url: 'queryTodolist.do?mid=' + this.props.mid
       }
     })
   }
@@ -51,6 +51,7 @@ class Detail extends Component {
       rightButtonTitle: '确定',
       onRightButtonPress: () => {
         this.pushedComponent.save(() => {
+          this.todos.update()
           this.props.navigator.pop()
         })
       }
@@ -145,7 +146,7 @@ class Detail extends Component {
           <Text style={style.termContentRight}>打开</Text>
         </Term>
         <Term label="待办事项" onPress={this.handleTodosPress.bind(this)}>
-          <Text style={style.termContentRight}>{props.todoList ? props.todoList.length : 0}条</Text>
+          <Text style={style.termContentRight}>打开</Text>
         </Term>
         <Term label="群聊" onPress={this.handleChatPress.bind(this)}>
           <Text style={style.termContentRight}>打开</Text>
